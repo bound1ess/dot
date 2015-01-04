@@ -19,4 +19,14 @@ class DotSpec extends ObjectBehavior {
         $this->shouldHaveType('Bound1ess\Dot');
     }
 
+    function it_returns_the_data_array()
+    {
+        $this->toArray()->shouldReturn([
+            'foo' => [
+                'bar' => 42,
+                'baz' => null,
+            ],
+        ]);
+    }
+
 }

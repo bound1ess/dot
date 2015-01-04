@@ -16,4 +16,12 @@ class Dot {
         $this->data = $data;
     }
 
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->data;
+    }
+
 }
