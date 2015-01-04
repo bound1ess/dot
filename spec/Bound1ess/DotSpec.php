@@ -29,6 +29,11 @@ class DotSpec extends ObjectBehavior {
         ]);
     }
 
+    function it_returns_cached_paths()
+    {
+        $this->getPaths()->shouldReturn(['foo.bar', 'foo.baz']);
+    }
+
     function it_checks_whether_an_element_exists()
     {
         $this->exists('foo.bar')->shouldBe(true);

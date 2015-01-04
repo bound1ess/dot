@@ -32,6 +32,14 @@ class Dot implements \ArrayAccess {
     }
 
     /**
+     * @return array
+     */
+    public function getPaths()
+    {
+        return $this->paths;
+    }
+
+    /**
      * @param string $path
      * @return boolean
      */
