@@ -1,0 +1,15 @@
+{
+    "name": "bound1ess/dot",
+    "description": "dot.notation.in.php.made.simple",
+    "license": "MIT",
+    
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+
+    "autoload": {
+        "files": [
+            "src/Bound1ess/Dot.php"
+        ]
+    }
+}

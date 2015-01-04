@@ -1,0 +1,8 @@
+formatter.name: pretty
+
+suites:
+    dot_suite:
+        namespace: Bound1ess
+        spec_path: .
+        spec_prefix: spec
+        src_prefix: src 
