@@ -8,12 +8,19 @@ class Dot implements \ArrayAccess {
     protected $data = [];
 
     /**
+     * @var array
+     */
+    protected $paths = [];
+
+    /**
      * @param array $data
      * @return Dot
      */
     public function __construct(array $data = [])
     {
         $this->data = $data;
+    
+        $this->cachePaths($data);
     }
 
     /**
@@ -30,7 +37,7 @@ class Dot implements \ArrayAccess {
      */
     public function exists($path)
     {
-
+        return in_array($path, $this->paths, true);
     }
 
     /**
@@ -47,4 +54,29 @@ class Dot implements \ArrayAccess {
     public function offsetSet($offset, $value) {}
     public function offsetUnset($offset) {}
 
+    /**
+     * @param array $data
+     * @param string $path
+     * @return void
+     */
+    protected function cachePaths(array $data, $path = '')
+    {
+        $appendToPath = function($one, $two)
+        {
+            return $one ? "{$one}.{$two}" : $two;
+        };
+
+        foreach ($data as $key => $value)
+        {
+            if (is_array($value))
+            {
+                $this->cachePaths($value, $appendToPath($path, $key));
+            }
+            else
+            {
+                $this->paths[] = $appendToPath($path, $key);
+            }
+        }        
+    }
+    
 }
