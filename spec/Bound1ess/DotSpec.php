@@ -29,4 +29,17 @@ class DotSpec extends ObjectBehavior {
         ]);
     }
 
+    function it_checks_whether_an_element_exists()
+    {
+        $this->exists('foo.bar')->shouldBe(true);
+        $this->exists('foo.bar')->shouldBe(
+            isset ($this->getWrappedObject()['foo.bar'])
+        );
+
+        $this->exists('invalid.path')->shouldBe(false);
+        $this->exists('invalid.path')->shouldBe(
+            isset ($this->getWrappedObject()['invalid.path'])
+        );
+    }
+
 }

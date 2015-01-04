@@ -1,6 +1,6 @@
 <?php namespace Bound1ess;
 
-class Dot {
+class Dot implements \ArrayAccess {
     
     /**
      * @var array
@@ -23,5 +23,28 @@ class Dot {
     {
         return $this->data;
     }
+
+    /**
+     * @param string $path
+     * @return boolean
+     */
+    public function exists($path)
+    {
+
+    }
+
+    /**
+     * @param string $offset
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return $this->exists($offset);        
+    }
+
+    // @see \ArrayAccess
+    public function offsetGet($offset) {}
+    public function offsetSet($offset, $value) {}
+    public function offsetUnset($offset) {}
 
 }
