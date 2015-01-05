@@ -81,6 +81,7 @@ class Dot implements \ArrayAccess {
 
         $data[$last] = $value;
 
+        $this->paths = [];
         $this->cachePaths($this->data);                
     }
 
@@ -105,11 +106,6 @@ class Dot implements \ArrayAccess {
      */
     protected function cachePaths(array $data, $path = '')
     {
-        if ( ! $path)
-        {
-            $this->paths = [];
-        }
-
         $appendToPath = function($one, $two)
         {
             return $one ? "{$one}.{$two}" : $two;
@@ -121,10 +117,8 @@ class Dot implements \ArrayAccess {
             {
                 $this->cachePaths($value, $appendToPath($path, $key));
             }
-            else
-            {
-                $this->paths[] = $appendToPath($path, $key);
-            }
+                
+            $this->paths[] = $appendToPath($path, $key);
         }        
     }
     

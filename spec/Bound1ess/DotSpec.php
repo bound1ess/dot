@@ -31,7 +31,7 @@ class DotSpec extends ObjectBehavior {
 
     function it_returns_cached_paths()
     {
-        $this->getPaths()->shouldReturn(['foo.bar', 'foo.baz']);
+        $this->getPaths()->shouldReturn(['foo.bar', 'foo.baz', 'foo',]);
     }
 
     function it_checks_whether_an_element_exists()
@@ -64,6 +64,24 @@ class DotSpec extends ObjectBehavior {
                 ],
             ],
             'smth' => [],
+        ]);
+
+        $this->getPaths()->shouldReturn([
+            'foo.bar', 'foo.baz', 'foo.faz', 'foo.some.path', 'foo.some', 'foo', 'smth',
+        ]);
+    }
+
+    function it_rewrites_a_value()
+    {
+        $this->add('foo.bar', true);
+
+        $this->getWrappedObject()['foo.baz'] = false;
+
+        $this->toArray()->shouldReturn([
+            'foo' => [
+                'bar' => true,
+                'baz' => false,
+            ],
         ]);
     }
 
