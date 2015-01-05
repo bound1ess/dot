@@ -98,4 +98,15 @@ class DotSpec extends ObjectBehavior {
         $this->get('invalid.path')->shouldReturn(null);
     }
 
+    function it_removes_an_element()
+    {
+        $this->remove('foo.bar');
+        
+        unset ($this->getWrappedObject()['foo.baz']);
+
+        $this->toArray()->shouldReturn([
+            'foo' => [],
+        ]);
+    }
+
 }

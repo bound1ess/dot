@@ -125,8 +125,38 @@ class Dot implements \ArrayAccess {
         return $this->get($offset);
     }
 
-    // @see \ArrayAccess
-    public function offsetUnset($offset) {}
+    /**
+     * @param string $path
+     * @return void
+     */
+    public function remove($path)
+    {
+        $path = explode('.', $path);
+        $last = array_pop($path);
+
+        $data =& $this->data;
+
+        foreach ($path as $element)
+        {
+            if ( ! isset ($data[$element]))
+            {
+                return null;
+            }
+
+            $data =& $data[$element];
+        }
+
+        unset ($data[$last]);
+    }
+
+    /**
+     * @param string $offset
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        $this->remove($offset);
+    } 
 
     /**
      * @param array $data
