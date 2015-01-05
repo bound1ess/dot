@@ -1,10 +1,14 @@
 # Dot
 
+[![Build Status](https://travis-ci.org/bound1ess/dot.svg?branch=master)](https://travis-ci.org/bound1ess/dot)
+
 Dot notation in PHP made simple.
 
 ## Installation
 
-*@TODO*
+```shell
+composer require bound1ess/dot:~1
+```
 
 ## Usage
 

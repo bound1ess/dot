@@ -2,6 +2,13 @@
     "name": "bound1ess/dot",
     "description": "dot.notation.in.php.made.simple",
     "license": "MIT",
+    "keywords": ["dot", "notation", "array", "manipulations"],
+    "authors": [
+        {
+            "name": "bound1ess",
+            "email": "bound1ess.dev@gmail.com"
+        }
+    ],
     
     "require-dev": {
         "phpspec/phpspec": "~2.0"
