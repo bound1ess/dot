@@ -85,4 +85,17 @@ class DotSpec extends ObjectBehavior {
         ]);
     }
 
+    function it_returns_a_value()
+    {
+        $this->add('some', 'value');
+
+        $this->get('some')->shouldReturn('value');
+        $this->get('some')->shouldReturn($this->getWrappedObject()['some']);
+
+        $this->get('foo.bar')->shouldReturn(42);
+        $this->get('foo.baz')->shouldReturn(null);
+
+        $this->get('invalid.path')->shouldReturn(null);
+    }
+
 }

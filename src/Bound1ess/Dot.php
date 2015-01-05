@@ -95,8 +95,37 @@ class Dot implements \ArrayAccess {
         $this->add($offset, $value);
     }
 
+    /**
+     * @param string $path
+     * @return mixed
+     */
+    public function get($path)
+    {
+        $data = $this->data;
+
+        foreach (explode('.', $path) as $element)
+        {
+            if ( ! isset ($data[$element]))
+            {
+                return null;
+            }
+        
+            $data = $data[$element];
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param string $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
     // @see \ArrayAccess
-    public function offsetGet($offset) {}
     public function offsetUnset($offset) {}
 
     /**
