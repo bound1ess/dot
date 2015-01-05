@@ -12,6 +12,8 @@ composer require bound1ess/dot:~1
 
 ## Usage
 
+For more information, check out the `docs` folder.
+
 ```php
 $data = new Bound1ess\Dot([
     'foo' => [
