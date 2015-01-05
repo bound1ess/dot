@@ -47,4 +47,24 @@ class DotSpec extends ObjectBehavior {
         );
     }
 
+    function it_adds_an_element()
+    {
+        $this->add('foo.faz', false);
+        $this->add('smth', []);
+
+        $this->getWrappedObject()['foo.some.path'] = true;
+
+        $this->toArray()->shouldReturn([
+            'foo' => [
+                'bar'  => 42,
+                'baz'  => null,
+                'faz'  => false,
+                'some' => [
+                    'path' => true,
+                ],
+            ],
+            'smth' => [],
+        ]);
+    }
+
 }

@@ -57,9 +57,45 @@ class Dot implements \ArrayAccess {
         return $this->exists($offset);        
     }
 
+    /**
+     * @param string $path
+     * @param mixed $value
+     * @return void
+     */
+    public function add($path, $value)
+    {
+        $path = explode('.', $path);
+        $last = array_pop($path);
+    
+        $data =& $this->data;
+
+        foreach ($path as $element)
+        {
+            if ( ! isset ($data[$element]))
+            {
+                $data[$element] = [];
+            }
+            
+            $data =& $data[$element];
+        } 
+
+        $data[$last] = $value;
+
+        $this->cachePaths($this->data);                
+    }
+
+    /**
+     * @param string $offset
+     * @param mixed $value
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->add($offset, $value);
+    }
+
     // @see \ArrayAccess
     public function offsetGet($offset) {}
-    public function offsetSet($offset, $value) {}
     public function offsetUnset($offset) {}
 
     /**
@@ -69,6 +105,11 @@ class Dot implements \ArrayAccess {
      */
     protected function cachePaths(array $data, $path = '')
     {
+        if ( ! $path)
+        {
+            $this->paths = [];
+        }
+
         $appendToPath = function($one, $two)
         {
             return $one ? "{$one}.{$two}" : $two;
